@@ -10,10 +10,24 @@
 	<meta name="description" content="A demonstration of what can be accomplished visually through CSS-based design.">
 	<meta name="robots" content="all">
         <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-	<!--[if lt IE 9]>
+        <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet"> 
+  <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">  <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway:700" rel="stylesheet"> 
+ <!--[if lt IE 9]>
 	<script src="script/html5shiv.js"></script>
 	<![endif]-->
-</head>
+<script>
+function w3_open() {
+  document.getElementById("main").style.marginLeft = "25%";
+  document.getElementById("mySidebar").style.width = "25%";
+  document.getElementById("mySidebar").style.display = "block";
+  document.getElementById("openNav").style.display = 'none';
+}
+function w3_close() {
+  document.getElementById("main").style.marginLeft = "0%";
+  document.getElementById("mySidebar").style.display = "none";
+  document.getElementById("openNav").style.display = "inline-block";
+}
+</script></head>
 
 
 <body id="css-zen-garden">
@@ -22,22 +36,25 @@
 		<header>
 			<h1>CSS Zen Garden</h1>
                         <h2>The Beauty of <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> Design</h2>
-		</header>
+		
+
+
+                </header>
 <div class="res" id="res">
 				<h3 class="resources">Resources:</h3>
 				<ul>
 					<li class="view-css">
 						<a href="style.css" title="View the source CSS file of the currently-viewed design.">
-							View This Design&#8217;s <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> </a>
+							View This Design&#8217;s <abbr class="tooltipx">CSS<span class="tooltiptextx">Cascading Style Sheets</span></abbr> </a>
 					</li>
 					<li class="css-resources">
 						<a href="http://www.mezzoblue.com/zengarden/resources/" title="Links to great sites with information on using CSS.">
-						<abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
+						<abbr class="tooltipx">CSS<span class="tooltiptextx">Cascading Style Sheets</span></abbr>
                                                 Resources </a>
 					</li>
 					<li class="zen-faq">
 						<a href="http://www.mezzoblue.com/zengarden/faq/" title="A list of Frequently Asked Questions about the Zen Garden.">
-						<abbr class="tooltip">FAQ<span class="tooltiptext">Frequently Asked Questions</span></abbr>
+						<abbr class="tooltipx">FAQ<span class="tooltiptextx">Frequently Asked Questions</span></abbr>
                                                 </a>
 					</li>
 					<li class="zen-submit">
@@ -55,9 +72,9 @@
                             <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>-based design. 
                             Select any style sheet from the list to load it into this page.</p>
 			<p>Download the example 
-                            <a class="tooltip" href="/examples/index"> 
+                            <a class="tooltip" href="index.html" download> 
                                 html file<span class="tooltiptext">This page's source HTML code, not to be modified.</span></a> 
-                            and <a class="tooltip" href="/examples/style.css">
+                            and <a class="tooltip" href="style.css" download>
                                 css file<span class="tooltiptext">This page's sample CSS, the file you may modify.</span></a>
                         </p>
 		</div>
@@ -70,7 +87,7 @@
                             support, and abandoned browsers.
                         </p>
 			<p>We must clear the mind of the past. Web enlightenment has been achieved thanks to the tireless efforts of folk like the 
-                            <abbr class="tooltip">W3C<span class="tooltiptext">World Wide Web Consortium</span></abbr>, 
+                            <abbr class="tooltip">W3C,<span class="tooltiptext">World Wide Web Consortium</span></abbr>
                             <abbr class="tooltip">WaSP<span class="tooltiptext">Web Standards Project</span></abbr>,
                             and the major browser creators.
                         </p>
@@ -82,10 +99,14 @@
     <div class="main supporting" id="zen-supporting" role="main">
 		<div class="explanation" id="zen-explanation" role="article">
 			<h3>So What is This About?</h3>
-                        <img id="myImg" style="float: right; margin: 20px 0px 0 20px; height: 450px" src="Nikiforova_Anastasija_infografiks.png" alt="CSS infographics">
-                       <p>There is a continuing need to show the power of 
+                        <img id="myImg" style="float: right; margin: 20px 0px 0 40px;" src="Nikiforova_Anastasija_infografiks.png" alt="CSS infographics">
+                                    <div id="myModal" class="modal">
+                                      <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
+                                      <img class="modal-content" id="img01" alt="modal">
+                                    </div>
+                        <p>There is a continuing need to show the power of 
                             <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>. The Zen Garden aims to excite, inspire, and encourage participation. 
-                            To begin, view some of the existing designs in the list. Clicking on any one will load the style sheet into this very page. 
+                           <p> To begin, view some of the existing designs in the list. Clicking on any one will load the style sheet into this very page. 
                             The <abbr class="tooltip" >HTML<span class="tooltiptext">HyperText Markup Language</span></abbr> 
                             remains the same, the only thing that has changed is the external 
                             <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> file. Yes, really.
@@ -93,24 +114,14 @@
                         <p>
 			<abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
                         allows complete and total control over the style of a hypertext document. 
-                            The only way this can be illustrated in a way that gets people excited is by demonstrating what it can truly be, once the reins are placed in the hands of those able to create beauty from structure. 
-                            Designers and coders alike have contributed to the beauty of the web; we can always push it further.
-                            </p>                           
-                                    <!-- The Modal -->
-                                    <div id="myModal" class="modal">
-                                      <!-- The Close Button -->
-                                      <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                                      <!-- Modal Content (The Image) -->
-                                      <img class="modal-content" id="img01">
-                                      <!-- Modal Caption (Image Text) -->
-                                      <div id="caption"></div>
-                                    </div>
-		
+                            The only way this can be illustrated in a way that gets people excited is by demonstrating what it can truly be, once the reins are placed in the hands of those able to create beauty from structure. </p> 
+                           <p> Designers and coders alike have contributed to the beauty of the web; we can always push it further.
+                            </p>   
                 </div>
 
 		<div class="participation" id="zen-participation" role="article">
-			<h3>Participation</h3>
-			<p>Strong visual design has always been our focus. You are modifying this page, so strong 
+			<h3>Participation</h3>			
+                        <p>Strong visual design has always been our focus. You are modifying this page, so strong 
                             <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> 
                             skills are necessary too, but the example files are commented well enough that even 
                             <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
@@ -171,19 +182,22 @@
                             </a> so that others may learn from your work.
                         </p>
                         
-			<p role="contentinfo">By <a href="http://www.mezzoblue.com/">Dave Shea</a>. Bandwidth graciously donated by 
-                            <a href="http://www.mediatemple.net/">mediatemple</a>. Now available: <a href="http://www.amazon.com/exec/obidos/ASIN/0321303474/mezzoblue-20/">Zen Garden, the book</a>.</p>
-		</div>
+			<blockquote><p role="contentinfo">
+                            By <a href="http://www.mezzoblue.com/">Dave Shea</a>. Bandwidth graciously donated by 
+                            <a href="http://www.mediatemple.net/">mediatemple</a>. 
+                            Now available: <a href="http://www.amazon.com/exec/obidos/ASIN/0321303474/mezzoblue-20/">Zen Garden, the book</a>.
+ </p></blockquote>
+ 
+		 </div>
 		<footer>
-                        <a href="https://validator.w3.org/nu/#file" title="Check the validity of this site&#8217;s HTML" class="zen-validate-html"><i style="font-size:24px" class="fa">&#xf13b;</i></a>
-                        <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS" class="zen-validate-css"><i style="font-size:24px" class="fa">&#xf15b;</i></a>
+                        <a href="https://validator.w3.org/nu/#/AI/index.html" title="Check the validity of this site&#8217;s HTML" class="zen-validate-html"><i style="font-size:24px" class="fa">&#xf13b;</i></a>
+                        <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS" class="zen-validate-css"><i style="font-size:24px" class="fa fa-file-code-o"></i></a>
 			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="View the Creative Commons license of this site: Attribution-NonCommercial-ShareAlike." class="zen-license"><i style="font-size:24px" class="fa">&#xf20a;</i></a>
 			<a href="http://mezzoblue.com/zengarden/faq/#aaa" title="Read about the accessibility of this site" class="zen-accessibility"><i style="font-size:24px" class="fa">&#xf29b;</i></a>
 			<a href="https://github.com/mezzoblue/csszengarden.com" title="Fork this site on Github" class="zen-github"><i style="font-size:24px" class="fa">&#xf09b;</i></a>
-                        <br><br>
+                        <br><br><br>
                         <small>© Anastasija Ņikiforova 2017</small>
                 </footer>
-
 	</div>
 </div>
 
@@ -196,7 +210,7 @@
                                  
 					<ul>
 						<li class="next">
-							<a href="http://csszengarden.com/page1">
+							<a href="1.html">
 								Next Designs <span class="indicator">&rsaquo;</span>
 							</a>
 						</li>
@@ -239,6 +253,8 @@
 					</li>					</ul>
 				</nav>
 			</div>
+			
+	
 </aside>
 <div class="extra1" role="presentation"></div><div class="extra2" role="presentation"></div>
 <div class="extra3" role="presentation"></div>
