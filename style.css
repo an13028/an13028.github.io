@@ -89,11 +89,11 @@ font-size: 0.7em;
     background-color: #990000; /* Green */
     border: none;
     color: white;
-    padding: 5px 10px;
+    padding: 3px 7px;
     text-align: center;
     text-decoration: none;
     display: inline-block;
-    font-size: 16px;
+    font-size: 12px;
     margin: 4px 190px;
     cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
@@ -105,7 +105,7 @@ font-size: 0.7em;
 }
 .button2{
     margin: 4px 1px;
-    padding: 8px 100px;
+    padding: 5px 100px;
     border-radius: 5%;
 }
 label{
