@@ -98,8 +98,8 @@ font-size: 0.7em;
     border-radius: 7%;
 }
 .button1 {
-    font-size: 10px;
-    font-weight: normal;
+    font-size: 8px;
+    font-weight: 500;
 }
 .button1:hover, .button2:hover, .button3:hover {
     box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
