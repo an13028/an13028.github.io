@@ -59,21 +59,21 @@ fieldset select{
 footer{
     font-weight: bold;
     text-align: center;  
-	position: absolute;
-	right: 0;
-	bottom: 0;
-	left: 0;
-	padding: 1rem;
-	font-size: 70%
+    position: absolute;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    padding: 1rem;
+    font-size: 70%
 }
 #about{
-	position:absolute;
-	left:20px;
-	top:100px;
+    position:absolute;
+    left:20px;
+    top:120px;
     width: 15%;
-	border-right: 6px solid #990000;
+    border-right: 6px solid #990000;
     background-color: #b3cccc;
-	height:84%;
+    height:84%;
 }
 #about p{
 margin-left: 2px;
@@ -89,6 +89,56 @@ font-size: 0.7em;
 }
 #about .p{
     text-align:justify;
+}
+.button {
+    background-color: #990000; /* Green */
+    border: none;
+    color: white;
+    padding: 8px 10px;
+    text-align: center;
+    text-decoration: none;
+    display: inline-block;
+    font-size: 16px;
+    margin: 4px 190px;
+    cursor: pointer;
+    -webkit-transition-duration: 0.4s; /* Safari */
+    transition-duration: 0.4s;
+    border-radius: 7%;
+}
+.button1:hover, .button2:hover {
+    box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
+}
+.button2{
+    margin: 4px 1px;
+    padding: 8px 100px;
+    border-radius: 5%;
+}
+label{
+   width: 200px;
+display:inline-block
+}
+input{
+   width: 55px;
+   display:inline-block
+}
+#Processes{
+       width: 300px;
+}
+#Algorithm{
+           width: 100px;
+
+}
+::-webkit-input-placeholder { /* Chrome/Opera/Safari */
+    font-size: 8px;
+}
+::-moz-placeholder { /* Firefox 19+ */
+    font-size: 8px
+}
+:-ms-input-placeholder { /* IE 10+ */
+    font-size: 8px
+}
+:-moz-placeholder { /* Firefox 18- */
+    font-size: 8px
 }
 /* 
 Created on : 22-Mar-2017, 19:03:09
