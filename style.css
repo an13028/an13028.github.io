@@ -85,13 +85,13 @@ font-size: 0.7em;
     background-color: #990000; /* Green */
     border: none;
     color: white;
-    padding: 3px 7px;
+    padding: 3px 5px;
     text-align: center;
     font-weight: bold;
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
-    margin: 4px 200px;
+    margin: 4px 220px;
     cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
