@@ -91,7 +91,7 @@ font-size: 0.7em;
     text-decoration: none;
     display: inline-block;
     font-size: 12px;
-    margin: 4px 210px;
+    margin: 4px 200px;
     cursor: pointer;
     -webkit-transition-duration: 0.4s; /* Safari */
     transition-duration: 0.4s;
@@ -119,11 +119,10 @@ input{
    display:inline-block
 }
 #Processes{
-       width: 300px;
+   width: 300px;
 }
 #Algorithm{
-           width: 100px;
-
+   width: 85px;
 }
 ::-webkit-input-placeholder { /* Chrome/Opera/Safari */
     font-size: 8px;
