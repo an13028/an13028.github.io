@@ -97,13 +97,17 @@ font-size: 0.7em;
     transition-duration: 0.4s;
     border-radius: 7%;
 }
-.button1:hover, .button2:hover {
+.button1:hover, .button2:hover, .button3:hover {
     box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
 }
 .button2{
     margin: 4px 1px;
-    padding: 5px 100px;
+    padding: 8px 100px;
     border-radius: 5%;
+}
+.button3{
+    margin: 4px 1px;
+    padding: 8px 10px;
 }
 label{
    width: 210px;
