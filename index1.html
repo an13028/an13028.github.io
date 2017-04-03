@@ -1,288 +1,124 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="lv"> 
+<!--SEO optimization jept-->
 <head>
-	<meta charset="utf-8">
-	<title>CSS Zen Garden: The Beauty of CSS Design. Anastasija Ņikiforova </title>
-	<link rel="stylesheet" media="screen" href="style.css">
-	<link rel="alternate" type="application/rss+xml" title="RSS" href="http://www.csszengarden.com/zengarden.xml">
-	<meta name="viewport" content="width=device-width, initial-scale=1.0">
-	<meta name="author" content="Anastasija Nikiforova">
-	<meta name="description" content="A demonstration of what can be accomplished visually through CSS-based design.">
-	<meta name="robots" content="all">
-        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-        <link href="https://fonts.googleapis.com/css?family=Syncopate" rel="stylesheet"> 
-  <link href="https://fonts.googleapis.com/css?family=Prompt" rel="stylesheet">  <link href="https://fonts.googleapis.com/css?family=Poppins|Raleway:700" rel="stylesheet"> 
- <!--[if lt IE 9]>
-	<script src="script/html5shiv.js"></script>
-	<![endif]-->
-<script>
-function w3_open() {
-  document.getElementById("main").style.marginLeft = "25%";
-  document.getElementById("mySidebar").style.width = "25%";
-  document.getElementById("mySidebar").style.display = "block";
-  document.getElementById("openNav").style.display = 'none';
-}
-function w3_close() {
-  document.getElementById("main").style.marginLeft = "0%";
-  document.getElementById("mySidebar").style.display = "none";
-  document.getElementById("openNav").style.display = "inline-block";
-}
-</script></head>
+<meta charset="UTF-8">
+<link rel="stylesheet" href="style.css">
+<title>OSK: Dinamiskā atmiņas iedalīšana</title>
 
+	<script src="inc/jquery.js"></script>
+	<script src="inc/raphael.js"></script>
+	<script src="inc/draw.js"></script>
+	<script src="inc/input.js"></script>
+<script> function show(aval) {
+    if (aval == "FF") {
+    hiddenDiv.style.display='inline-block';
+    hiddenDivN.style.display='none';
+    hiddenDivB.style.display='none';
+    hiddenDivW.style.display='none';
+    Form.fileURL.focus();
+    } 
+    else if (aval == "BF") {
+    hiddenDivB.style.display='inline-block';
+    hiddenDiv.style.display='none';
+    hiddenDivN.style.display='none';
+    hiddenDivW.style.display='none';
+    Form.fileURL.focus();
+    } 
+    else if (aval == "NF") {
+    hiddenDivN.style.display='inline-block';
+    hiddenDiv.style.display='none';
+    hiddenDivB.style.display='none';
+    hiddenDivW.style.display='none';
+    Form.fileURL.focus();
+    } 
+    else if (aval == "WF") {
+    hiddenDivW.style.display='inline-block';
+    hiddenDiv.style.display='none';
+    hiddenDivB.style.display='none';
+    hiddenDivN.style.display='none';
+    Form.fileURL.focus();
+    } 
+    else{
+    hiddenDiv.style.display='none';
+    }
+  }</script>
+</head>
+<body>
+	<h1>DINAMISKĀ ATMIŅAS IEDALĪŠANA</h1>
+<div class="row">       
+           <fieldset>
+          <label>Pick an algorithm:</label>
+                <select name="Algorithm" onchange="java_script_:show(this.options[this.selectedIndex].value)">
+                  <option value="FF">First-fit</option>
+                  <option value="BF">Best-fit</option>
+                  <option value="NF">Next-fit</option>
+                  <option value="WF">Worst-fit</option>
+              </select>
 
-<body id="css-zen-garden">
-<div class="page-wrapper">
-	<section class="intro" id="zen-intro">
-		<header>
-			<h1>CSS Zen Garden</h1>
-                        <h2>The Beauty of <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> Design</h2>
-		
-
-
-                </header>
-<div class="res" id="res">
-				<h3 class="resources">Resources:</h3>
-				<ul>
-					<li class="view-css">
-						<a href="style.css" title="View the source CSS file of the currently-viewed design.">
-							View This Design&#8217;s <abbr class="tooltipx">CSS<span class="tooltiptextx">Cascading Style Sheets</span></abbr> </a>
-					</li>
-					<li class="css-resources">
-						<a href="http://www.mezzoblue.com/zengarden/resources/" title="Links to great sites with information on using CSS.">
-						<abbr class="tooltipx">CSS<span class="tooltiptextx">Cascading Style Sheets</span></abbr>
-                                                Resources </a>
-					</li>
-					<li class="zen-faq">
-						<a href="http://www.mezzoblue.com/zengarden/faq/" title="A list of Frequently Asked Questions about the Zen Garden.">
-						<abbr class="tooltipx">FAQ<span class="tooltiptextx">Frequently Asked Questions</span></abbr>
-                                                </a>
-					</li>
-					<li class="zen-submit">
-						<a href="http://www.mezzoblue.com/zengarden/submit/" title="Send in your own CSS file.">
-							Submit a Design	 </a>
-					</li>
-					<li class="zen-translations">
-						<a href="http://www.mezzoblue.com/zengarden/translations/" title="View translated versions of this page.">
-							Translations </a>
-					</li>
-				</ul>
-			</div>
-		<div class="summary" id="zen-summary" role="article">
-			<p>A demonstration of what can be accomplished through 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>-based design. 
-                            Select any style sheet from the list to load it into this page.</p>
-			<p>Download the example 
-                            <a class="tooltip" href="index.html" download> 
-                                html file<span class="tooltiptext">This page's source HTML code, not to be modified.</span></a> 
-                            and <a class="tooltip" href="style.css" download>
-                                css file<span class="tooltiptext">This page's sample CSS, the file you may modify.</span></a>
-                        </p>
-		</div>
-
-		<div class="preamble" id="zen-preamble" role="article">
-			<h3>The Road to Enlightenment</h3>
-			<p>Littering a dark and dreary road lay the past relics of browser-specific tags, incompatible 
-                            <abbr class="tooltip">DOM<span class="tooltiptext">Document Object Model</span></abbr>s, 
-                            broken <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
-                            support, and abandoned browsers.
-                        </p>
-			<p>We must clear the mind of the past. Web enlightenment has been achieved thanks to the tireless efforts of folk like the 
-                            <abbr class="tooltip">W3C,<span class="tooltiptext">World Wide Web Consortium</span></abbr>
-                            <abbr class="tooltip">WaSP<span class="tooltiptext">Web Standards Project</span></abbr>,
-                            and the major browser creators.
-                        </p>
-			<p>The CSS Zen Garden invites you to relax and meditate on the important lessons of the masters. 
-                            Begin to see with clarity. Learn to use the time-honored techniques in new and invigorating fashion. 
-                            Become one with the web.</p>
-		</div>
-	</section>
-    <div class="main supporting" id="zen-supporting" role="main">
-		<div class="explanation" id="zen-explanation" role="article">
-			<h3>So What is This About?</h3>
-                        <img id="myImg" style="float: right; margin: 20px 0px 0 40px;" src="Nikiforova_Anastasija_infografiks.png" alt="CSS infographics">
-                                    <div id="myModal" class="modal">
-                                      <span class="close" onclick="document.getElementById('myModal').style.display='none'">&times;</span>
-                                      <img class="modal-content" id="img01" alt="modal">
-                                    </div>
-                        <p>There is a continuing need to show the power of 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>. The Zen Garden aims to excite, inspire, and encourage participation. 
-                           <p> To begin, view some of the existing designs in the list. Clicking on any one will load the style sheet into this very page. 
-                            The <abbr class="tooltip" >HTML<span class="tooltiptext">HyperText Markup Language</span></abbr> 
-                            remains the same, the only thing that has changed is the external 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> file. Yes, really.
-                        </p>
-                        <p>
-			<abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
-                        allows complete and total control over the style of a hypertext document. 
-                            The only way this can be illustrated in a way that gets people excited is by demonstrating what it can truly be, once the reins are placed in the hands of those able to create beauty from structure. </p> 
-                           <p> Designers and coders alike have contributed to the beauty of the web; we can always push it further.
-                            </p>   
-                </div>
-
-		<div class="participation" id="zen-participation" role="article">
-			<h3>Participation</h3>			
-                        <p>Strong visual design has always been our focus. You are modifying this page, so strong 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> 
-                            skills are necessary too, but the example files are commented well enough that even 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
-                            novices can use them as starting points. 
-                            Please see the <a href="http://www.mezzoblue.com/zengarden/resources/" title="A listing of CSS-related resources">
-                                <abbr class="tooltip">CSS Resource Guide<span class="tooltiptext">A listing of CSS-related resources</span></abbr>
-                               </a> for advanced tutorials and tips on working with 
-                                <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>.
-                        </p>
-			<p>You may modify the style sheet in any way you wish, but not the 
-                            <abbr class="tooltip">HTML<span class="tooltiptext">HyperText Markup Language</span></abbr>
-                            This may seem daunting at first if you&#8217;ve never worked this way before, but follow the listed links to learn more, and use the sample files as a guide.
-                        </p>
-			<p>Download the sample <a class="tooltip" href="/examples/index">HTML<span class="tooltiptext">Cascading Style Sheets</span></a> 
-                            and <a class="tooltip" href="/examples/style.css"> CSS <span class="tooltiptext">This page's sample CSS, the file you may modify.</span></a> 
-                            
-                            to work on a copy locally. Once you have completed your masterpiece (and please, don&#8217;t submit half-finished work) upload your 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
-                            file to a web server under your control. 
-                            <a class="tooltip" href="http://www.mezzoblue.com/zengarden/submit/"> Send us a link
-                                <span class="tooltiptext">Use the contact form to send us your CSS file</span></a> to an archive of that file and all associated assets, and if we choose to use it we will download it and place it on our server.
-                        </p>
-		</div>
-
-		<div class="benefits" id="zen-benefits" role="article">
-			<h3>Benefits</h3>
-			<p>Why participate? For recognition, inspiration, and a resource we can all refer to showing people how amazing 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> really can be. 
-                            This site serves as equal parts inspiration for those working on the web today, learning tool for those who will be tomorrow, and gallery of future techniques we can all look forward to.
-                        </p>
-                    </div>
-
-		<div class="requirements" id="zen-requirements" role="article" >
-			<h3>Requirements</h3>
-			<p>Where possible, we would like to see mostly 
-                            <abbr class="tooltip">CSS 1 &amp; 2<span class="tooltiptext">Cascading Style Sheets, levels 1 and 2</span></abbr> usage. 
-                            <abbr class="tooltip">CSS 3 &amp; 4<span class="tooltiptext">Cascading Style Sheets, levels 3 and 4</span></abbr>
-                            should be limited to widely-supported elements only, or strong fallbacks should be provided. 
-                            The CSS Zen Garden is about functional, practical 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> and not the latest bleeding-edge tricks viewable by 2% of the browsing public. 
-                            The only real requirement we have is that your <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> validates.
-                        </p>
-			<p>Luckily, designing this way shows how well various browsers have implemented 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr> by now. 
-                            When sticking to the guidelines you should see fairly consistent results across most modern browsers. 
-                            Due to the sheer number of user agents on the web these days &#8212; especially when you factor in mobile &#8212; pixel-perfect layouts may not be possible across every platform. 
-                            That&#8217;s okay, but do test in as many as you can. Your design should work in at least IE9+ and the latest Chrome, Firefox, iOS and Android browsers (run by over 90% of the population).
-                        </p>
-			<p>We ask that you submit original artwork. Please respect copyright laws. Please keep objectionable material to a minimum, and try to incorporate unique and interesting visual themes to your work. 
-                            We&#8217;re well past the point of needing another garden-related design.
-                        </p>
-			<p>This is a learning exercise as well as a demonstration. You retain full copyright on your graphics (with limited exceptions, see 
-                            <a href="http://www.mezzoblue.com/zengarden/submit/guidelines/">submission guidelines</a>), but we ask you release your 
-                            <abbr class="tooltip">CSS<span class="tooltiptext">Cascading Style Sheets</span></abbr>
-                            under a Creative Commons license identical to the 
-                            <a class="tooltip" href="http://creativecommons.org/licenses/by-nc-sa/3.0/">
-                                one on this site <span class="tooltiptext">View the Zen Garden's license information.</span>
-                            </a> so that others may learn from your work.
-                        </p>
-                        
-			<blockquote><p role="contentinfo">
-                            By <a href="http://www.mezzoblue.com/">Dave Shea</a>. Bandwidth graciously donated by 
-                            <a href="http://www.mediatemple.net/">mediatemple</a>. 
-                            Now available: <a href="http://www.amazon.com/exec/obidos/ASIN/0321303474/mezzoblue-20/">Zen Garden, the book</a>.
- </p></blockquote>
- 
-		 </div>
-		<footer>
-                        <a href="https://validator.w3.org/nu/#/AI/index.html" title="Check the validity of this site&#8217;s HTML" class="zen-validate-html"><i style="font-size:24px" class="fa">&#xf13b;</i></a>
-                        <a href="http://jigsaw.w3.org/css-validator/check/referer" title="Check the validity of this site&#8217;s CSS" class="zen-validate-css"><i style="font-size:24px" class="fa fa-file-code-o"></i></a>
-			<a href="http://creativecommons.org/licenses/by-nc-sa/3.0/" title="View the Creative Commons license of this site: Attribution-NonCommercial-ShareAlike." class="zen-license"><i style="font-size:24px" class="fa">&#xf20a;</i></a>
-			<a href="http://mezzoblue.com/zengarden/faq/#aaa" title="Read about the accessibility of this site" class="zen-accessibility"><i style="font-size:24px" class="fa">&#xf29b;</i></a>
-			<a href="https://github.com/mezzoblue/csszengarden.com" title="Fork this site on Github" class="zen-github"><i style="font-size:24px" class="fa">&#xf09b;</i></a>
-                        <br><br><br>
-                        <small>© Anastasija Ņikiforova 2017</small>
-                </footer>
+              <div id="hiddenDiv" style="display:none">
+                  <p>In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.
+                  </p>
+              </div>
+              <div id="hiddenDivB" style="display:none">
+                  <p>The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.
+                  </p>
+              </div>
+              <div id="hiddenDivN" style="display:none">
+                  <p>Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.
+                  </p>
+              </div>
+              <div id="hiddenDivW" style="display:none">
+                  <p>In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.
+	</p>
+              </div>
+           </fieldset>
+</div>	
+        
+        
+	<div id="about">		
+			<p class="t">Projekta autori:</p>
+               <p class="a"> Anastasija Ņikiforova (an13028)</p>
+               <p class="a"> Dmitrijs Grekovs (dg13026)</p>
+               <p class="a"> Vitalijs Feščenko (vf13004)</p>
+               <br><br>
+               <p class="p"> <b>Projekta mērķis: </b>parādīt kā notiek atmiņas iedalīšana, kādi ir atmiņas iedalīšanas visizplatītākie algoritmi un ar ko tie atšķiras savā starpā. </p>
 	</div>
-</div>
+	Canvas was here
 
-
-	<aside class="sidebar">
-			<div class="design-archives" id="design-archives">
-  
-				<h3 class="archives">Archives:</h3>
-                                <nav>
-                                 
-					<ul>
-						<li class="next">
-							<a href="1.html">
-								Next Designs <span class="indicator">&rsaquo;</span>
-							</a>
-						</li>
-						<li class="viewall">
-                                                    <a class="tooltip" href="http://www.mezzoblue.com/zengarden/alldesigns/">
-                                                        View All Designs<span class="tooltiptext">View every submission to the Zen Garden.</span></a>
-						</li>
-					</ul>
-				</nav>
-			</div>
-            
-            <div class="design-selection" id="design-selection">                          
-                             <h3 class="select">Select a Design:</h3>
-				<nav>
-                        	<ul>
-					<li>
-						<a href="http://csszengarden.com/221/" class="design-name">Mid Century Modern</a> 
-                                                by <a href="http://andrewlohman.com/" class="designer-name">Andrew Lohman</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/220/" class="design-name">Garments</a> 
-                                                by <a href="http://danielmall.com/" class="designer-name">Dan Mall</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/219/" class="design-name">Steel</a> 
-                                                by <a href="http://steffen-knoeller.de" class="designer-name">Steffen Knoeller</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/218/" class="design-name">Apothecary</a> 
-                                                by <a href="http://trentwalton.com" class="designer-name">Trent Walton</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/217/" class="design-name">Screen Filler</a> 
-                                                by <a href="http://elliotjaystocks.com/" class="designer-name">Elliot Jay Stocks</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/216/" class="design-name">Fountain Kiss</a> 
-                                                by <a href="http://jeremycarlson.com" class="designer-name">Jeremy Carlson</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/215/" class="design-name">A Robot Named Jimmy</a> 
-                                                by <a href="http://meltmedia.com/" class="designer-name">meltmedia</a>
-					</li>					<li>
-						<a href="http://csszengarden.com/214/" class="design-name">Verde Moderna</a> 
-                                                by <a href="http://www.mezzoblue.com/" class="designer-name">Dave Shea</a>
-					</li>					</ul>
-				</nav>
-			</div>
-			
-	
-</aside>
-<div class="extra1" role="presentation"></div><div class="extra2" role="presentation"></div>
-<div class="extra3" role="presentation"></div>
-<div class="extra4" role="presentation"></div><div class="extra5" role="presentation"></div>
-<div class="extra6" role="presentation"></div>
-
-
-<script>
-// Get the modal
-var modal = document.getElementById('myModal');
-
-// Get the image and insert it inside the modal - use its "alt" text as a caption
-var img = document.getElementById('myImg');
-var modalImg = document.getElementById("img01");
-var captionText = document.getElementById("caption");
-img.onclick = function(){
-    modal.style.display = "block";
-    modalImg.src = this.src;
-    captionText.innerHTML = this.alt;
-}
-
-// Get the <span> element that closes the modal
-var span = document.getElementsByClassName("close")[0];
-
-// When the user clicks on <span> (x), close the modal
-span.onclick = function() {
-  modal.style.display = "none";
-}
-</script>
+<hr>
 </body>
+<footer> © 2017 - Anastasija Ņikiforova, Dmitrijs Grekovs, Vitalijs Feščenko </footer>
+
+<script src="memory.js"></script>
+<script>
+
+// Inits memory, first argument is memory size, second argument is info size per block
+// init() can be reused, deleting existing blocks
+memory.init(1024,5);
+
+memory.nextFit(10);	// bs.take -> find block and set to status taken / bs.free -> find block and set status to free
+memory.nextFit(159);
+memory.nextFit(13);
+memory.nextFit(3);
+memory.nextFit(200);
+memory.nextFit(4);
+memory.nextFit(173);
+/*
+memory.cleanBlocks();	// Sets all blocks to free - doesn't affect fragmentation
+memory.takeBlocks();	// Sets all blocks to allocated - doesn't affect fragmentation
+
+// Deletes all blocks and performs random fragmentation on total size defined
+
+// First argument - amount of blocks memory will be fragmented (biggest priority - function always return specified number of blocks even if it doesn't fit deviation and free memory percentage arguments)
+// Second argument - deviation between size of blocks (small - all blocks equal, large - more diverse)
+// Third argument - percent of memory to be left free (not the best solution, best would be (O(n!). Also the more blocks and deviation, the better resulting percent fits desired)
+memory.randomFragmentation(20 ,50, 25);
+*/
+console.log(memory.getStatistics());
+
+console.log(memory.getBlocks());
+
+
+</script>
 </html>
