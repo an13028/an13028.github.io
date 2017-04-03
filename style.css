@@ -44,7 +44,7 @@ padding-bottom: 5%
 body p {
 margin: 0.75em 0;
 line-height: 2;
-font-size: 0.5em;
+font-size: 0.7em;
 }
 fieldset{
     width: 100%
@@ -111,7 +111,7 @@ font-size: 0.7em;
 label{
    width: 210px;
    display:inline-block;
-   font-size: 70%
+   font-size: 80%
 }
 input{
    width: 55px;
