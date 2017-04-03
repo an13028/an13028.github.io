@@ -43,20 +43,56 @@
     hiddenDiv.style.display='none';
     }
   }</script>
+
+<script>
+function myFunction() {
+    var x = document.getElementById("Blocks").value;
+    var y = document.getElementById("Deviation").value;
+    var z = document.getElementById("Free").value;
+    document.getElementById("demo").innerHTML = x;
+    document.getElementById("demo1").innerHTML = y;
+    document.getElementById("demo2").innerHTML = z;
+}
+</script>
+
+<script>
+function myFunction1() {
+    var x = document.getElementById("Processes").value;
+    document.getElementById("demo3").innerHTML = x;
+}
+</script>
+
 </head>
 <body>
 	<h1>DINAMISKĀ ATMIŅAS IEDALĪŠANA</h1>
 	<h2>Dynamic memory allocation</h2>
+                       <p id="demo" style="color:red; font-weight: bold">TEST: fields and buttons just get data and return it; Buttons onclick should be changed according to functionality</p>
+
 <div class="row">       
            <fieldset>
-          <label>Pick an algorithm:</label>
-                <select name="Algorithm" onchange="java_script_:show(this.options[this.selectedIndex].value)">
+               <label>Number of blocks: </label>
+               <input type="text" id="Blocks" placeholder="# of blocks">
+               <p id="demo"></p>
+                
+               <label>Standard deviation:</label>
+               <input type="text" id="Deviation" placeholder="SD">
+               <p id="demo1"></p>
+               
+               <label>Free memory:</label>
+               <input type="text" id="Free" placeholder="Free memory"> %
+               <p id="demo2"></p>
+               
+               <button onclick="myFunction()" class="button button1">Fragment</button>
+               <br>
+               
+           <label>Pick an algorithm:</label>
+                <select id="Algorithm" name="Algorithm" onchange="java_script_:show(this.options[this.selectedIndex].value)">
                   <option value="FF">First-fit</option>
                   <option value="BF">Best-fit</option>
                   <option value="NF">Next-fit</option>
                   <option value="WF">Worst-fit</option>
               </select>
-
+              
               <div id="hiddenDiv" style="display:none">
                   <p>In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.
                   </p>
@@ -73,9 +109,17 @@
                   <p>In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.
 	</p>
               </div>
+           <br>
+           <label>Processes:</label>
+               <input type="text" id="Processes" placeholder="Size of processes">
+               <p id="demo3"></p>
+                <button onclick="myFunction1()" class="button button2">Animation</button>
+
            </fieldset>
 </div>	
-        
+              <canvas id="myCanvas" width="600px" height="400px" style="border:1px solid #000000;">
+Your browser does not support the HTML5 canvas tag.
+</canvas>
         
 	<div id="about">		
 			<p class="t">Projekta autori:</p>
@@ -93,11 +137,9 @@
 
 <script src="memory.js"></script>
 <script>
-
 // Inits memory, first argument is memory size, second argument is info size per block
 // init() can be reused, deleting existing blocks
 memory.init(1024,5);
-
 memory.nextFit(10);	// bs.take -> find block and set to status taken / bs.free -> find block and set status to free
 memory.nextFit(159);
 memory.nextFit(13);
@@ -108,18 +150,13 @@ memory.nextFit(173);
 /*
 memory.cleanBlocks();	// Sets all blocks to free - doesn't affect fragmentation
 memory.takeBlocks();	// Sets all blocks to allocated - doesn't affect fragmentation
-
 // Deletes all blocks and performs random fragmentation on total size defined
-
 // First argument - amount of blocks memory will be fragmented (biggest priority - function always return specified number of blocks even if it doesn't fit deviation and free memory percentage arguments)
 // Second argument - deviation between size of blocks (small - all blocks equal, large - more diverse)
 // Third argument - percent of memory to be left free (not the best solution, best would be (O(n!). Also the more blocks and deviation, the better resulting percent fits desired)
 memory.randomFragmentation(20 ,50, 25);
 */
 console.log(memory.getStatistics());
-
 console.log(memory.getBlocks());
-
-
 </script>
 </html>
