@@ -101,7 +101,7 @@ font-size: 0.7em;
     box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
 }
 .button1 {
-    width: 120px;
+    width: 90px;
 }
 .button2{
     margin: 3px 1px;
@@ -114,7 +114,7 @@ font-size: 0.7em;
 }
 .button4{
     margin-left: 4px;
-    margin-right: 2px
+    margin-right: 20px
 }
 label{
    width: 210px;
