@@ -28,7 +28,7 @@ font-weight: bold;
 h1 {
 text-align: center;
 font-family: 'Syncopate', sans-serif;
-font-size: 2em;
+font-size: 1.8em;
 text-transform: uppercase;
 font-weight: 700;
 padding-top: 1%;
@@ -44,7 +44,7 @@ padding-bottom: 3%
 body p {
 margin: 0.75em 0;
 line-height: 2;
-font-size: 0.7em;
+font-size: 0.5em;
 }
 fieldset{
     width: 100%
@@ -69,7 +69,7 @@ fieldset select{
 #about p{
 margin-left: 2px;
 margin-right: 7px;
-font-size: 0.7em;
+font-size: 0.8em;
 }
 #about  p::first-letter {
     font-size: 140%;
@@ -120,7 +120,7 @@ font-size: 0.7em;
 label{
    width: 210px;
    display:inline-block;
-   font-size: 80%
+   font-size: 70%
 }
 input{
    width: 55px;
