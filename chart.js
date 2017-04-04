@@ -24,7 +24,7 @@ ctx.drawChart = function() {
 	ctx.clear();
 	var statistics = memory.getStatistics();
 	var sectors = new Array();
-	sectors.push({ arc: (2*statistics.available_percent/100), bytes: statistics.available, color:"#4d8066", text:"available"});
+	sectors.push({ arc: (2*statistics.available_percent/100), bytes: statistics.available, color:"#3d8f66", text:"available"});
 	sectors.push({ arc: (2*statistics.allocated_percent/100), bytes: statistics.allocated, color:"rgba(153, 0, 0, 0.6)", text:"allocated"});
 	sectors.push({ arc: (2*statistics.info_percent/100), bytes: statistics.info, color:"#94b8b8", text:"as block info"});
 	
