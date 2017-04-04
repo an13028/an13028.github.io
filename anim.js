@@ -64,7 +64,7 @@ var $anim = (function () {
         bY++;
       }
       ctx.fill();
-      // ctx.stroke();
+      ctx.stroke();
       
     }
     
