@@ -1,204 +1,201 @@
 <!DOCTYPE html>
-<html lang="lv"> 
-<!--SEO optimization jept-->
-<head>
-<meta charset="UTF-8">
-<link rel="stylesheet" href="style.css">
-<title>OSK: Dinamiskā atmiņas iedalīšana</title>
-
-<script> function show(aval) {
-    if (aval == "FF") {
-    hiddenDiv.style.display='inline-block';
-    hiddenDivN.style.display='none';
-    hiddenDivB.style.display='none';
-    hiddenDivW.style.display='none';
-    Form.fileURL.focus();
-    } 
-    else if (aval == "BF") {
-    hiddenDivB.style.display='inline-block';
-    hiddenDiv.style.display='none';
-    hiddenDivN.style.display='none';
-    hiddenDivW.style.display='none';
-    Form.fileURL.focus();
-    } 
-    else if (aval == "NF") {
-    hiddenDivN.style.display='inline-block';
-    hiddenDiv.style.display='none';
-    hiddenDivB.style.display='none';
-    hiddenDivW.style.display='none';
-    Form.fileURL.focus();
-    } 
-    else if (aval == "WF") {
-    hiddenDivW.style.display='inline-block';
-    hiddenDiv.style.display='none';
-    hiddenDivB.style.display='none';
-    hiddenDivN.style.display='none';
-    Form.fileURL.focus();
-    } 
-    else{
-    hiddenDiv.style.display='none';
-    }
-  }
-  </script>
-
-<script>
-function myFunction1() {
-    var x = document.getElementById("Processes").value;
-    document.getElementById("demo3").innerHTML = x;
-}
-</script>
-
-</head>
-<body>
-	<h1>DINAMISKĀ ATMIŅAS IEDALĪŠANA</h1>
-	<h2>Dynamic memory allocation</h2>
-                      
-<div class="row">       
-           <fieldset>
-               Statistics:<br>
-	<canvas id="pie_chart" width="310" height="140" style="border:0px solid black"></canvas>
-
-	<hr>
-               <form id="myForm">
-               <label>Memory Buffer:</label>
-               <input type="number" name="buff_size" value="1024" id="buff_size" min="0" placeholder="Memory buffer"> <br>
-               
-               <label>Information size per block:</label>
-               <input type="number" name="inf_size" value="5" id="info_size" min="0" placeholder="Info size"> <br>
-              
-               <button onclick="init_memory()" class="button button1">Init memory</button><br>
-               
-               
-               <label>Number of blocks: </label>
-               <input type="number" name="block_number" value="5" id="block_number" min="1"><br>
-                               
-               <label>Standard deviation:</label>
-               <input type="number" name="stdev" value="10" id="stdev" min="0"><br>
-                              
-               <label>Unallocated memory:</label>
-               <input type="number" name="mem_free" value="25" id="mem_free" min="0" max="100"> %<br>
-               
-               <button onclick="fragment_memory()" class="button button1">Fragment memory</button><br>
-                <hr>
-               <button onclick="allocate_memory()" class="button button4">Allocate all blocks</button>
-              
-               <button onclick="deallocate_memory()" class="button button4">Deallocate all blocks</button>
-               <br>
-               
-           <label>Pick an algorithm:</label>
-                <select id="Algorithm" name="Algorithm" onchange="java_script_:show(this.options[this.selectedIndex].value)">
-                  <option value="" disabled selected>Algorithm</option>
-                  <option value="FF">First-fit</option>
-                  <option value="BF">Best-fit</option>
-                  <option value="NF">Next-fit</option>
-                  <option value="WF">Worst-fit</option>
-              </select>
-              
-              <div id="hiddenDiv" style="display:none">
-                  <p>In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.
-                  </p>
-              </div>
-              <div id="hiddenDivB" style="display:none">
-                  <p>The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.
-                  </p>
-              </div>
-              <div id="hiddenDivN" style="display:none">
-                  <p>Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.
-                  </p>
-              </div>
-              <div id="hiddenDivW" style="display:none">
-                  <p>In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.
-	</p>
-              </div>
-           <br>
-           <label>Processes:</label>
-               <input type="text" id="Processes" placeholder="Size of processes">
-               <p id="demo3"></p>
-                
-               
-               
-               <button onclick="myFunction1()" class="button button2">Animation</button>
-               <button type="reset" value="Reset" class="button button3">Reset</button>
-
-</form>
-           </fieldset>
-</div>	
-              <canvas id="myCanvas" width="600" height="400" style="border:1px solid black;">
-Your browser does not support the HTML5 canvas tag.
-</canvas>
+<html lang="lv">
+  <head>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <title>OSK: Dinamiskā atmiņas iedalīšana</title>
+    <script src="chart.js"></script>
+    <script src="memory.js"></script>
+    <script src="anim.js"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', function () {
+        // elements
+        var canvasPie        = document.getElementById('canvas-pie'),
+            canvasMem        = document.getElementById('canvas-mem'),
+            inputBuffSize    = document.getElementById('input-buff-size'),
+            inputInfoSize    = document.getElementById('input-info-size'),
+            inputBlockCnt    = document.getElementById('input-block-cnt'),
+            inputStdev       = document.getElementById('input-stdev'),
+            inputMemFree     = document.getElementById('input-mem-free'),
+            inputAlgo        = document.getElementById('input-algo'),
+            inputProc        = document.getElementById('input-proc'),
+            buttonInitMem    = document.getElementById('button-init-mem'),
+            buttonFragMem    = document.getElementById('button-frag-mem'),
+            buttonAllocMem   = document.getElementById('button-alloc-all'),
+            buttonDeallocMem = document.getElementById('button-dealloc-all'),
+            buttonAnim       = document.getElementById('button-anim');
         
-	<div id="about">		
-			<p class="t">Projekta autori:</p>
-               <p class="a"> Anastasija Ņikiforova (an13028)</p>
-               <p class="a"> Dmitrijs Grekovs (dg13026)</p>
-               <p class="a"> Vitālijs Feščenko (vf13004)</p>
-               <br><br>
-               <p class="p"> <b>Projekta mērķis: </b> <br>parādīt kā notiek atmiņas iedalīšana, kādi ir atmiņas iedalīšanas visizplatītākie algoritmi un ar ko tie atšķiras savā starpā. </p>
-	</div>
-	Canvas was here
-
-<hr>
-<div class = "footer"> © 2017 - Anastasija Ņikiforova, Dmitrijs Grekovs, Vitālijs Feščenko </div>
-</body>
-
-<script src="memory.js"></script>
-<script>
-
-allocate_memory = function() {
-	memory.takeBlocks();
-	ctx.drawChart();
-}
-
-deallocate_memory = function() {
-	memory.cleanBlocks();
-	ctx.drawChart();
-}
-
-init_memory = function() {
-	var buff = Number(document.getElementById("buff_size").value);
-	var info = Number(document.getElementById("info_size").value);
-	memory.init(buff,info);
-	ctx.drawChart();
-	console.log(memory.getStatistics());
-	console.log(memory.getBlocks());
-}
-
-fragment_memory = function() {
-	var block_number = Number(document.getElementById("block_number").value);
-	var stdev = Number(document.getElementById("stdev").value);
-	var mem_free = Number(document.getElementById("mem_free").value);
-	memory.randomFragmentation(block_number, stdev, mem_free);
-	ctx.drawChart();
-	console.log(memory.getStatistics());
-	console.log(memory.getBlocks());
-}
-
-// Inits memory, first argument is memory size, second argument is info size per block
-// init() can be reused, deleting existing blocks
-memory.init(1024,5);
-
-memory.nextFit(10);	// bs.take -> find block and set to status taken / bs.free -> find block and set status to free
-memory.nextFit(159);
-memory.nextFit(13);
-memory.nextFit(3);
-memory.nextFit(200);
-memory.nextFit(4);
-memory.nextFit(173);
-
-memory.cleanBlocks();	// Sets all blocks to free - doesn't affect fragmentation
-memory.takeBlocks();	// Sets all blocks to allocated - doesn't affect fragmentation
-
-// Deletes all blocks and performs random fragmentation on total size defined
-
-// First argument - amount of blocks memory will be fragmented (biggest priority - function always return specified number of blocks even if it doesn't fit deviation and free memory percentage arguments)
-// Second argument - deviation between size of blocks (small - all blocks equal, large - more diverse)
-// Third argument - percent of memory to be left free (not the best solution, best would be (O(n!). Also the more blocks and deviation, the better resulting percent fits desired)
-memory.randomFragmentation(20 ,50, 25);
-
-console.log(memory.getStatistics());
-
-console.log(memory.getBlocks());
-
-</script>
-<script src="chart.js"></script>
+        
+        // render
+        function render () {
+          $chart.drawChart(canvasPie, memory);
+          $anim.drawBlocks(canvasMem, memory);
+        }
+        
+        
+        // events
+        buttonInitMem.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          var buffSize = Number(inputBuffSize.value),
+              infoSize = Number(inputInfoSize.value);
+          
+          memory.init(buffSize, infoSize);
+          render();
+        });
+        
+        buttonFragMem.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          var blockCnt = Number(inputBlockCnt.value),
+              stdev    = Number(inputStdev.value),
+              memFree  = Number(inputMemFree.value);
+          
+          memory.randomFragmentation(blockCnt, stdev, memFree);
+          render();
+        });
+        
+        buttonAllocMem.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          memory.takeBlocks();
+          render();
+        });
+        
+        buttonDeallocMem.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          memory.cleanBlocks();
+          render();
+        });
+        
+        inputAlgo.addEventListener('change', function (event) {
+          event.preventDefault();
+          
+          // update HTML attribute according to DOM attribute to apply CSS
+          inputAlgo.setAttribute('value', inputAlgo.value);
+        });
+        
+        buttonAnim.addEventListener('click', function (event) {
+          event.preventDefault();
+          
+          if (!$anim.isAnimating()) {
+            var func = 'firstFit';
+            switch (inputAlgo.value) {
+              case 'NF':
+                func = 'nextFit';
+                break;
+              case 'BF':
+                func = 'bestFit';
+                break;
+              case 'WF':
+                func = 'worstFit';
+                break;
+            }
+            var sizes = inputProc.value.split(',');
+            
+            function callback () {
+              if (sizes.length > 0) {
+                var size = Number(sizes.shift());
+                if (size > 0) {
+                  memory[func](size);
+                  $anim.startAnim(canvasMem, memory, callback);
+                } else {
+                  callback();
+                }
+              }
+            }
+            
+            callback();
+          }
+        });
+              
+        
+        // init
+        buttonInitMem.click();
+        
+      });
+    </script>
+  </head>
+  <body>
+    <header>
+      <h1>DINAMISKĀ ATMIŅAS IEDALĪŠANA</h1>
+      <h2>Dynamic memory allocation</h2>
+    </header>
+    
+    <section>
+      <div class="left">
+        Statistics:
+        <br>
+        <canvas id="canvas-pie" width="500" height="140"></canvas>
+        
+        <hr>
+        
+        <label for="input-buff-size">Memory Buffer:</label>
+        <input type="number" value="2048" id="input-buff-size" min="0" placeholder="Memory buffer">
+        <br>
+        
+        <label for="input-info-size">Information size per block:</label>
+        <input type="number" value="8" id="input-info-size" min="0" placeholder="Info size">
+        <br>
+        
+        <button id="button-init-mem" class="button button1">Init memory</button>
+        <br>
+        
+        <label for="input-block-cnt">Number of blocks:</label>
+        <input type="number" value="32" id="input-block-cnt" min="1" placeholder="Number of blocks">
+        <br>
+                       
+        <label for="input-stdev">Standard deviation:</label>
+        <input type="number" value="20" id="input-stdev" min="0">
+        <br>
+                      
+        <label for="input-mem-free">Unallocated memory percentage:</label>
+        <input type="number" value="65" id="input-mem-free" min="0" max="100"> %
+        <br>
+        
+        <button id="button-frag-mem" class="button button1">Fragment memory</button><br>
+        
+        <button id="button-alloc-all" class="button button4">Allocate all blocks</button>
+        <button id="button-dealloc-all" class="button button4">Deallocate all blocks</button>
+        <hr>
+         
+        <label for="input-algo">Pick an algorithm:</label>
+        <select id="input-algo" value="FF">
+          <option value="FF" selected>First-fit</option>
+          <option value="BF">Best-fit</option>
+          <option value="NF">Next-fit</option>
+          <option value="WF">Worst-fit</option>
+        </select>
+        
+        <p id="algo-info-FF">In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.</p>
+        <p id="algo-info-BF">The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.</p>
+        <p id="algo-info-NF">Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.</p>
+        <p id="algo-info-WF">In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.</p>
+        
+        <label for="input-proc">Size of processes:</label>
+        <input type="text" id="input-proc" placeholder="Size of processes" value="10,20,5,40">
+        <p id="demo3"></p>
+        
+        <button id="button-anim" class="button button2">Animation</button>
+      </div>
+      <div class="right">
+        <canvas id="canvas-mem" width="600" height="600"></canvas>
+      </div>
+    </section>  
+    
+    
+    <aside>    
+      <p class="t">Projekta autori:</p>
+      <p>Anastasija Ņikiforova (an13028)</p>
+      <p>Dmitrijs Grekovs (dg13026)</p>
+      <p>Vitālijs Feščenko (vf13004)</p>
+      <br><br>
+      <p class="t">Projekta mērķis:</p>
+      <p class="p">Parādīt kā notiek atmiņas iedalīšana, kādi ir atmiņas iedalīšanas visizplatītākie algoritmi un ar ko tie atšķiras savā starpā.</p>
+    </aside>
+    
+    
+    <footer>© 2017 - Anastasija Ņikiforova, Dmitrijs Grekovs, Vitālijs Feščenko</footer>
+  </body>
 </html>
