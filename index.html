@@ -9,7 +9,7 @@
 <script src="inc/raphael.js"></script>
 <script src="inc/draw.js"></script>
 <script src="inc/input.js"></script>
-	
+
 <script> function show(aval) {
     if (aval == "FF") {
     hiddenDiv.style.display='inline-block';
@@ -43,18 +43,7 @@
     hiddenDiv.style.display='none';
     }
   }
-</script>
-
-<script>
-function myFunction() {
-    var x = document.getElementById("Blocks").value;
-    var y = document.getElementById("Deviation").value;
-    var z = document.getElementById("Free").value;
-    document.getElementById("demo").innerHTML = x;
-    document.getElementById("demo1").innerHTML = y;
-    document.getElementById("demo2").innerHTML = z;
-}
-</script>
+  </script>
 
 <script>
 function myFunction1() {
@@ -67,30 +56,44 @@ function myFunction1() {
 <body>
 	<h1>DINAMISKĀ ATMIŅAS IEDALĪŠANA</h1>
 	<h2>Dynamic memory allocation</h2>
-	<p id="demo" style="color:red; font-weight: bold">TEST: fields and buttons added; 1) Some of buttons onclick should be changed according to functionality; 2) myFunction() - for "Fragment" button; 3) myFunction1() - for "Animation" button</p>
+                       <p id="demo" style="color:red; font-weight: bold">TEST: fields and buttons just get data and return it; 1) Buttons onclick should be changed according to functionality; 2) myFunction() - for "Fragment" button; 3) myFunction1() - for "Animation" button</p>
 
 <div class="row">       
            <fieldset>
-		<form id="myForm">
+               Statistics:<br>
+	<canvas id="pie_chart" width="310" height="140" style="border:2px solid rgb(193, 39, 45)"></canvas>
+
+	<hr>
+               <form id="myForm">
+               <label>Memory Buffer:</label>
+               <input type="number" name="buff_size" value="1024" id="buff_size" min="0" placeholder="Memory buffer"> <br>
+               
+               <label>Information size per block:</label>
+               <input type="number" name="inf_size" value="5" id="info_size" min="0" placeholder="Info size"> <br>
+              
+               <button onclick="init_memory()" class="button button1">Init memory</button><br>
+               
+               
                <label>Number of blocks: </label>
-               <input type="text" id="Blocks" placeholder="# of blocks">
-               <p id="demo"></p>
-                
+               <input type="number" name="block_number" value="5" id="block_number" min="1"><br>
+                               
                <label>Standard deviation:</label>
-               <input type="text" id="Deviation" placeholder="SD">
-               <p id="demo1"></p>
+               <input type="number" name="stdev" value="10" id="stdev" min="0"><br>
+                              
+               <label>Unallocated memory:</label>
+               <input type="number" name="mem_free" value="25" id="mem_free" min="0" max="100"> %<br>
                
-               <label>Free memory:</label>
-               <input type="text" id="Free" placeholder="Free memory"> %
-               <p id="demo2"></p>
-               
-               <button onclick="myFunction()" class="button button1">Fragment</button>
+               <button onclick="fragment_memory()" class="button button1">Fragment memory</button><br>
+                <hr>
+               <button onclick="allocate_memory()" class="button button4">Allocate all blocks</button>
+              
+               <button onclick="deallocate_memory()" class="button button4">Deallocate all blocks</button>
                <br>
                
            <label>Pick an algorithm:</label>
                 <select id="Algorithm" name="Algorithm" onchange="java_script_:show(this.options[this.selectedIndex].value)">
                   <option value="" disabled selected>Algorithm</option>
-		  <option value="FF">First-fit</option>
+                  <option value="FF">First-fit</option>
                   <option value="BF">Best-fit</option>
                   <option value="NF">Next-fit</option>
                   <option value="WF">Worst-fit</option>
@@ -117,18 +120,15 @@ function myFunction1() {
                <input type="text" id="Processes" placeholder="Size of processes">
                <p id="demo3"></p>
                 
-                 <label>Memory Buffer:</label>
-               <input type="text" id="Buffer" placeholder="Memory buffer"> <br>
                
-               <label>Information size per block:</label>
-               <input type="text" id="info_size_per_block" placeholder="Info size"> <br>
                
                <button onclick="myFunction1()" class="button button2">Animation</button>
                <button type="reset" value="Reset" class="button button3">Reset</button>
-		</form>
+
+</form>
            </fieldset>
 </div>	
-              <canvas id="myCanvas" width="300" height="150" style="border:1px solid #000000;">
+              <canvas id="myCanvas" width="600" height="400" style="border:1px solid #000000;">
 Your browser does not support the HTML5 canvas tag.
 </canvas>
         
@@ -144,14 +144,44 @@ Your browser does not support the HTML5 canvas tag.
 
 <hr>
 <div class = "footer"> © 2017 - Anastasija Ņikiforova, Dmitrijs Grekovs, Vitālijs Feščenko </div>
-
 </body>
 
 <script src="memory.js"></script>
 <script>
+
+allocate_memory = function() {
+	memory.takeBlocks();
+	ctx.drawChart();
+}
+
+deallocate_memory = function() {
+	memory.cleanBlocks();
+	ctx.drawChart();
+}
+
+init_memory = function() {
+	var buff = Number(document.getElementById("buff_size").value);
+	var info = Number(document.getElementById("info_size").value);
+	memory.init(buff,info);
+	ctx.drawChart();
+	console.log(memory.getStatistics());
+	console.log(memory.getBlocks());
+}
+
+fragment_memory = function() {
+	var block_number = Number(document.getElementById("block_number").value);
+	var stdev = Number(document.getElementById("stdev").value);
+	var mem_free = Number(document.getElementById("mem_free").value);
+	memory.randomFragmentation(block_number, stdev, mem_free);
+	ctx.drawChart();
+	console.log(memory.getStatistics());
+	console.log(memory.getBlocks());
+}
+
 // Inits memory, first argument is memory size, second argument is info size per block
 // init() can be reused, deleting existing blocks
 memory.init(1024,5);
+
 memory.nextFit(10);	// bs.take -> find block and set to status taken / bs.free -> find block and set status to free
 memory.nextFit(159);
 memory.nextFit(13);
@@ -159,16 +189,21 @@ memory.nextFit(3);
 memory.nextFit(200);
 memory.nextFit(4);
 memory.nextFit(173);
-/*
+
 memory.cleanBlocks();	// Sets all blocks to free - doesn't affect fragmentation
 memory.takeBlocks();	// Sets all blocks to allocated - doesn't affect fragmentation
+
 // Deletes all blocks and performs random fragmentation on total size defined
+
 // First argument - amount of blocks memory will be fragmented (biggest priority - function always return specified number of blocks even if it doesn't fit deviation and free memory percentage arguments)
 // Second argument - deviation between size of blocks (small - all blocks equal, large - more diverse)
 // Third argument - percent of memory to be left free (not the best solution, best would be (O(n!). Also the more blocks and deviation, the better resulting percent fits desired)
 memory.randomFragmentation(20 ,50, 25);
-*/
+
 console.log(memory.getStatistics());
+
 console.log(memory.getBlocks());
+
 </script>
+<script src="chart.js"></script>
 </html>
