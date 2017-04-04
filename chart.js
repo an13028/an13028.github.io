@@ -1,74 +1,93 @@
-var canvas = document.getElementById("pie_chart");
-var ctx = canvas.getContext("2d");
-ctx.clear = function() { ctx.clearRect(0, 0, canvas.width, canvas.height); };
-ctx.drawCircle = function(x,y,radius,color,semi,line_width)
-{
-	ctx.beginPath();
-    ctx.arc(x, y, radius, 0, semi * Math.PI, false);
-    ctx.lineWidth = line_width;
-    ctx.strokeStyle = color;
-    ctx.stroke();
-};
-var pieChart = {
-	pos : {x:100,y:100},
-	radius: 60,
-	line_width:20
-};
-ctx.drawRect = function(x, y, width, height, color) {
-	ctx.beginPath();
-	ctx.rect(x, y, width, height);
-	ctx.fillStyle = color;
-	ctx.fill();
-};
-ctx.drawChart = function() {
-	ctx.clear();
-	var statistics = memory.getStatistics();
-	var sectors = new Array();
-	sectors.push({ arc: (2*statistics.available_percent/100), bytes: statistics.available, color:"#3d8f66", text:"available"});
-	sectors.push({ arc: (2*statistics.allocated_percent/100), bytes: statistics.allocated, color:"rgba(153, 0, 0, 0.6)", text:"allocated"});
-	sectors.push({ arc: (2*statistics.info_percent/100), bytes: statistics.info, color:"#94b8b8", text:"as block info"});
-	
 
-	var angle = 0;
-	for(var i=0; i<sectors.length; i++)
-	{
-		ctx.save();
-		ctx.translate(pieChart.pos.x - pieChart.radius/2, pieChart.pos.y - pieChart.radius/2);
-		ctx.rotate(angle* Math.PI);
-		ctx.drawCircle(0,0,pieChart.radius,sectors[i].color, sectors[i].arc, pieChart.line_width);
-		ctx.restore();
-		angle+=sectors[i].arc;
-	}
-	angle = 0;
-	var pos,half_angle,percentage;
-	for(var i=0; i<sectors.length; i++)	// Draw text
-	{
-		percentage = Math.round((sectors[i].arc/2*100)*10)/10;
-		angle+=sectors[i].arc/2;
-		if(percentage>0)
-		{
-			
-			ctx.save();
-			ctx.translate(pieChart.pos.x - pieChart.radius/2, pieChart.pos.y - pieChart.radius/2);
-			pos = {x:0,y:0};
-	 		pos.x = (pieChart.radius) * Math.cos(angle* Math.PI);
-			pos.y = (pieChart.radius) * Math.sin(angle* Math.PI);
-			ctx.font = "13px Arial";
-			ctx.fillText(percentage+"%",pos.x-8,pos.y+5);
-			ctx.restore();
-		}
-		angle+=sectors[i].arc/2;
-	}
-	for(var i=0; i<sectors.length; i++)	// Draw legend
-	{
-		ctx.save();
-		ctx.translate(160,10+20*i);
-		ctx.drawRect(0,0,10,10,sectors[i].color);
-		ctx.font = "13px Arial";
-		ctx.fillStyle = "black";
-		ctx.fillText(sectors[i].bytes+" bytes "+sectors[i].text,13,10);
-		ctx.restore();
-	}
-};
+var $chart = (function () {
+  
+  
+  var pieRadius = 60,
+      pieWidth = 20,
+      pieMargin = 25,
+      legendY = 10,
+      legendRow = 20,
+      availColor = '#3d8f66',
+      allocColor = '#990000',
+      infoColor = '#94b8b8';
+  
+  
+  function drawChart (canvas, memory) {
+    var statistics = memory.getStatistics();
+    var sectors = [
+      {
+        percentage: Math.round(statistics.available_percent * 10) / 10,
+        bytes: statistics.available,
+        color: availColor,
+        text: "available"
+      },
+      {
+        percentage: Math.round(statistics.allocated_percent * 10) / 10,
+        bytes: statistics.allocated,
+        color: allocColor,
+        text: "allocated"
+      },
+      {
+        percentage: Math.round(statistics.info_percent * 10) / 10,
+        bytes: statistics.info,
+        color: infoColor,
+        text: "as block info"
+      }
+    ];
+    var angle = 0;
+    for (var i = 0; i < sectors.length; i++)
+    {
+      sectors[i].arcStart = angle;
+      angle += 2 * Math.PI * sectors[i].percentage / 100;
+      sectors[i].arcEnd = angle;
+    }
+    
+    var ctx = canvas.getContext('2d');
+    ctx.clearRect(0, 0, canvas.width, canvas.height);
+    ctx.font = "13px Arial";
+    
+    // Draw arcs
+    ctx.save();
+    ctx.translate(pieMargin + pieRadius, canvas.height * 0.5);
+    for (var i = 0; i < sectors.length; i++)
+    {
+      ctx.lineWidth = pieWidth;
+      ctx.strokeStyle = sectors[i].color;
+      ctx.beginPath();
+      ctx.arc(0, 0, pieRadius, sectors[i].arcStart, sectors[i].arcEnd, false);
+      ctx.stroke();
+    }
+    
+    // Draw text
+    ctx.textAlign = 'center';
+    ctx.textBaseline = 'middle';
+    for (var i = 0; i < sectors.length; i++)
+    {
+      if (sectors[i].percentage > 0) {
+        angle = 0.5 * (sectors[i].arcStart + sectors[i].arcEnd);
+        var x = pieRadius * Math.cos(angle);
+        var y = pieRadius * Math.sin(angle);
+        ctx.fillText(sectors[i].percentage + "%", x, y);
+      }
+    }
+    ctx.restore();
+    
+    // Draw legend
+    ctx.save();
+    ctx.translate((pieMargin + pieRadius) * 2, legendY);
+    for (var i = 0; i < sectors.length; i++)
+    {
+      ctx.fillStyle = sectors[i].color;
+      ctx.fillRect(0, 0, 10, 10);
+      ctx.fillStyle = "black";
+      ctx.fillText(sectors[i].bytes + " bytes " + sectors[i].text, 13, 10);
+      ctx.translate(0, legendRow);
+    }
+    ctx.restore();
+  };
+  
+  return {
+    drawChart: drawChart
+  };
+})();
 
-ctx.drawChart();
