@@ -47,35 +47,35 @@ body p {
   font-size: 0.5em;
 }
 section {
-  width: 100%;
+  width: 95%;
   border: 1px solid gray;
   overflow: hidden;
-  margin-left: 0%
+  margin-left: 2%
 }
 div.left, div.right, div.left_left{
   float: left;
   padding: 5px;
 }
 div.left{ 
-  width: 350px;
-  padding-left: 3%
+  width: 355px;
+  padding-left: 5%
 }
 div.right{  
   width: 620px;
-  padding-left: 3%
+  padding-left: 9%
 }
 div.left_left{
   left: 20px;
   width: 15%;
   border-right: 6px solid #990000;
   background-color: #b3cccc;
+  height: 690px
 }
 footer{
   font-weight: bold;
   text-align: center;  
   font-size: 70%;
 }
-
 aside p{
   margin-left: 2px;
   margin-right: 7px;
@@ -100,7 +100,7 @@ aside .p{
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  margin: 3px 170px;
+  margin: 3px 143px;
   cursor: pointer;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
@@ -111,17 +111,19 @@ aside .p{
   box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
 }
 .button1 {
-  width: 130px;
+  width: 139px;
 }
 .button2{
   margin: 3px 1px;
   padding: 5px 100px;
+  width: 300px;
   border-radius: 5%;
   font-weight: 700;
 }
 .button4{
-  margin-left: 4px;
-  margin-right: 30px
+  margin-left: 5px;
+  margin-right: 2px;
+  padding-left: 16px
 }
 label{
   width: 210px;
