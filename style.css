@@ -104,12 +104,11 @@ font-size: 0.7em;
     width: 130px;
 }
 .button2{
-    margin: 3px 1px;
     padding: 8px 100px;
     border-radius: 5%;
+	font-weight: 700;
 }
 .button3{
-    margin: 3px 1px;
     padding: 8px 10px;
 }
 .button4{
