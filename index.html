@@ -95,6 +95,7 @@
             var sizes = inputProc.value.split(',');
             
             function callback () {
+              render();
               if (sizes.length > 0) {
                 var size = Number(sizes.shift());
                 if (size > 0) {
@@ -123,78 +124,78 @@
       <h2>Dynamic memory allocation</h2>
     </header>
     
-    <section>
-      <div class="left_left">      
-          <aside>          
-              <p class="t">Projekta autori:</p>          
-              <p>Anastasija Ņikiforova (an13028)</p>
-              <p>Dmitrijs Grekovs (dg13026)</p>
-              <p>Vitālijs Feščenko (vf13004)</p><br><br>
-
-              <p class="t">Projekta mērķis:</p>
-              <p class="p">Parādīt kā notiek atmiņas iedalīšana, kādi ir atmiņas iedalīšanas visizplatītākie algoritmi un ar ko tie atšķiras savā starpā.</p>
+    <section class="left">    
+      <aside>          
+        <p class="t">Projekta autori:</p>          
+        <p>Anastasija Ņikiforova (an13028)</p>
+        <p>Dmitrijs Grekovs (dg13026)</p>
+        <p>Vitālijs Feščenko (vf13004)</p><br><br>
+        
+        <p class="t">Projekta mērķis:</p>
+        <p class="p">Parādīt kā notiek atmiņas iedalīšana, kādi ir atmiņas iedalīšanas visizplatītākie algoritmi un ar ko tie atšķiras savā starpā.</p>
       </aside>
-      </div>
-
-      <div class="left">
-        Statistics:
-        <br>
-        <canvas id="canvas-pie" width="500" height="140"></canvas>
+    </section>
+    
+    <section class="right">
+      <section class="center">
+        <div class="left">
+          <h3>Statistics:</h3>
+          
+          <canvas id="canvas-pie" width="338" height="140"></canvas>
+          
+          <hr>
+          
+          <label for="input-buff-size">Memory Buffer:</label>
+          <input type="number" value="2048" id="input-buff-size" min="0" placeholder="Memory buffer">
+          
+          <label for="input-info-size">Information size per block:</label>
+          <input type="number" value="8" id="input-info-size" min="0" placeholder="Info size">
+          
+          <button id="button-init-mem" class="button">Init memory</button>
+          
+          <label for="input-block-cnt">Number of blocks:</label>
+          <input type="number" value="32" id="input-block-cnt" min="1" placeholder="Number of blocks">
+          
+          <label for="input-stdev">Standard deviation:</label>
+          <input type="number" value="20" id="input-stdev" min="0">
+          
+          
+          <label for="input-mem-free">Unallocated memory percentage:</label>
+          <input type="number" value="65" id="input-mem-free" min="0" max="100"><span>%</span>
+          
+          
+          <button id="button-frag-mem" class="button">Fragment memory</button>
+          
+          
+          <button id="button-alloc-all" class="button">Allocate all blocks</button>
+          <button id="button-dealloc-all" class="button">Deallocate all blocks</button>
+          <hr>
+           
+          <button id="button-anim" class="button">Animation</button>
+          
+          <label for="input-proc">Size of processes:</label>
+          <input type="text" id="input-proc" placeholder="Size of processes" value="10,20,5,40">
+          
+          <label for="input-algo">Pick an algorithm:</label>
+          <select id="input-algo" value="FF">
+            <option value="FF" selected>First-fit</option>
+            <option value="BF">Best-fit</option>
+            <option value="NF">Next-fit</option>
+            <option value="WF">Worst-fit</option>
+          </select>
+          
+          <p id="algo-info-FF">In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.</p>
+          <p id="algo-info-BF">The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.</p>
+          <p id="algo-info-NF">Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.</p>
+          <p id="algo-info-WF">In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.</p>
+          
+        </div>
+        <div class="right">
+          <canvas id="canvas-mem" width="600" height="600"></canvas>
+        </div>
         
-        <hr>
-        
-        <label for="input-buff-size">Memory Buffer:</label>
-        <input type="number" value="2048" id="input-buff-size" min="0" placeholder="Memory buffer">
-        <br>
-        
-        <label for="input-info-size">Information size per block:</label>
-        <input type="number" value="8" id="input-info-size" min="0" placeholder="Info size">
-        <br>
-        
-        <button id="button-init-mem" class="button button1">Init memory</button>
-        <br>
-        
-        <label for="input-block-cnt">Number of blocks:</label>
-        <input type="number" value="32" id="input-block-cnt" min="1" placeholder="Number of blocks">
-        <br>
-                       
-        <label for="input-stdev">Standard deviation:</label>
-        <input type="number" value="20" id="input-stdev" min="0">
-        <br>
-                      
-        <label for="input-mem-free">Unallocated memory percentage:</label>
-        <input type="number" value="65" id="input-mem-free" min="0" max="100"> %
-        <br>
-        
-        <button id="button-frag-mem" class="button button1">Fragment memory</button><br>
-        
-        <button id="button-alloc-all" class="button button4">Allocate all blocks</button>
-        <button id="button-dealloc-all" class="button button4">Deallocate all blocks</button>
-        <hr>
-         
-        <label for="input-algo">Pick an algorithm:</label>
-        <select id="input-algo" value="FF">
-          <option value="FF" selected>First-fit</option>
-          <option value="BF">Best-fit</option>
-          <option value="NF">Next-fit</option>
-          <option value="WF">Worst-fit</option>
-        </select>
-        
-        <p id="algo-info-FF">In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.</p>
-        <p id="algo-info-BF">The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.</p>
-        <p id="algo-info-NF">Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.</p>
-        <p id="algo-info-WF">In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.</p>
-        
-        <label for="input-proc">Size of processes:</label>
-        <input type="text" id="input-proc" placeholder="Size of processes" value="10,20,5,40">
-        
-        <button id="button-anim" class="button button2">Animation</button>
-      </div>
-      <div class="right">
-        <canvas id="canvas-mem" width="600" height="600"></canvas>
-      </div>
-     
-    </section>  
+      </section>
+    </section>
     
     
     <footer>© 2017 - Anastasija Ņikiforova, Dmitrijs Grekovs, Vitālijs Feščenko</footer>
