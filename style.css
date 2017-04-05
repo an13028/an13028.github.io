@@ -1,7 +1,6 @@
 html{
   width: 100%;
   height: 100%;
-  margin: 0;
   background: #f0f5f5;
 }
 * {
@@ -9,72 +8,94 @@ html{
   -moz-box-sizing: border-box;    /* Firefox, other Gecko */
   box-sizing: border-box;         /* Opera/IE 8+ */
 }
-html, body {
+html, body, section {
   padding: 0;
+  margin: 0;
 }
 body {
   width: 100%;
-  margin: 0 auto;
+  min-width: 1270px;
   color: black;
   font-family: 'Lucida Sans Unicode', sans-serif;
 }
 header {
   text-align: center;
+  width: 100%;
 }
 h1, h2 {
   margin: 0;
-  font-weight: bold;
+  font-weight: 700;
 }
 h1 {
   text-align: center;
   font-family: 'Syncopate', sans-serif;
   font-size: 1.8em;
   text-transform: uppercase;
-  font-weight: 700;
-  padding-top: 1%;
-  padding-bottom: 1.5%
+  padding: 20px 0;
 }
 h2{
   text-align: center;
   font-size: 1.2em;
-  font-weight: 700;
   font-style: italic;
-  padding-bottom: 3%
+  padding-bottom: 20px;
+}
+h3{
+  margin: 0;
+  font-weight: normal;
 }
 body p {
   margin: 0.75em 0;
   line-height: 2;
   font-size: 0.5em;
 }
-section {
-  width: 95%;
-  border: 1px solid gray;
-  overflow: hidden;
-  margin-left: 2%
-}
-div.left, div.right, div.left_left{
-  float: left;
-  padding: 5px;
-}
-div.left{ 
-  width: 355px;
-  padding-left: 5%
-}
-div.right{  
-  width: 620px;
-  padding-left: 9%
-}
-div.left_left{
-  left: 20px;
-  width: 15%;
-  border-right: 6px solid #990000;
-  background-color: #b3cccc;
-  height: 690px
-}
 footer{
+  width: 100%;
   font-weight: bold;
   text-align: center;  
   font-size: 70%;
+}
+header, footer,
+section.left, section.right,
+div.left, div.right {
+  float: left;
+  overflow: hidden;
+}
+section.left {
+  width: 300px;
+}
+section.right {
+  width: calc(100% - 300px);
+  min-width: 960px;
+}
+section.center {
+  width: 960px;
+  border: 1px solid gray;
+  overflow: hidden;
+  margin: 0 auto;
+}
+div.left, div.right {
+  padding: 5px;
+}
+div.left{
+  width: 348px;
+}
+div.right{
+  width: 610px;
+}
+
+div.left > * {
+  float: left;
+  margin: 3px;
+}
+hr{
+  width: 100%;
+}
+aside {
+  margin-left: 20px;
+  border-right: 6px solid #990000;
+  background-color: #b3cccc;
+  height: 677px;
+  float: left;
 }
 aside p{
   margin-left: 2px;
@@ -91,55 +112,49 @@ aside .t{
 aside .p{
   text-align:justify;
 }
-.button {
+button.button {
   background-color: #990000; /* Green */
   border: none;
   color: white;
-  padding: 5px 10px;
+  padding: 0;
   text-align: center;
   text-decoration: none;
   display: inline-block;
   font-size: 12px;
-  margin: 3px 143px;
+  margin: 3px;
   cursor: pointer;
   -webkit-transition-duration: 0.4s; /* Safari */
   transition-duration: 0.4s;
-  border-radius: 7%;
+  border-radius: 3px;
+  line-height: 25px;
   height: 25px;
+  width: 163px;
+  float: right;
 }
-.button:hover {
-  box-shadow: 0 10px 12px 0 rgba(0,0,0,0.24),0 10px 12px 0 rgba(0,0,0,0.24);
+button.button:hover {
+  box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.48);
 }
-.button1 {
-  width: 139px;
+#button-anim, #input-proc {
+  width: 332px;
 }
-.button2{
-  margin: 3px 1px;
-  padding: 5px 100px;
-  width: 300px;
-  border-radius: 5%;
-  font-weight: 700;
+#button-alloc-all {
+  clear: right;
 }
-.button4{
-  margin-left: 5px;
-  margin-right: 2px;
-  padding-left: 16px
-}
+
 label{
   width: 210px;
   display: inline-block;
   font-size: 80%
 }
 input{
-  width: 55px;
+  width: 75px;
   display: inline-block
 }
-#input-proc{
-  width: 300px;
-}
+
 #input-algo {
-  width: 90px;
+  width: 116px;
 }
+
 ::-webkit-input-placeholder, /* Chrome/Opera/Safari */
 ::-moz-placeholder, /* Firefox 19+ */
 :-ms-input-placeholder, /* IE 10+ */
@@ -150,6 +165,7 @@ input{
 p[id^=algo-info] {
   display: none;
   font-size: 10px;
+  height: 100px;
 }
 #input-algo[value=FF] ~ p[id$=FF],
 #input-algo[value=BF] ~ p[id$=BF],
