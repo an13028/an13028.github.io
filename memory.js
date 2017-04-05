@@ -146,9 +146,10 @@ memory.allocate = function (index, new_block_size, checkOnly) {
 };
 
 // Starts always from beginning till finds block large enough - O(n) worst case
-memory.firstFit = function (new_block_size) {
-  memory.animStart = 0;
-  memory.animEnd = memory.size - new_block_size;
+memory.firstFit = function (new_block_size, checkOnly) {
+  memory.animStart = memory.info_size;
+  memory.animEnd = memory.blocks[memory.blocks.length - 1].start + memory.info_size;
+  memory.animSize = new_block_size;
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
     return false;
@@ -156,8 +157,8 @@ memory.firstFit = function (new_block_size) {
   // Always start from beginning
   for (var i = 0; i < memory.blocks.length; i++)  // O(n) in worst case (no blocks available)
   {
-    if (memory.allocate(i, new_block_size)) {
-      memory.animEnd = memory.blocks[i].start;
+    if (memory.allocate(i, new_block_size, checkOnly)) {
+      memory.animEnd = memory.blocks[i].start + memory.info_size;
       return true;
     }
   }
@@ -165,9 +166,10 @@ memory.firstFit = function (new_block_size) {
 };
 
 // Starts from previously allocated block till finds block large enough - O(n) worst case
-memory.nextFit = function (new_block_size) {
-  memory.animStart = memory.blocks[memory.position].start;
-  memory.animEnd = memory.blocks[memory.position].start + memory.size - new_block_size; // when drawing will take modulo size
+memory.nextFit = function (new_block_size, checkOnly) {
+  memory.animStart = memory.blocks[memory.position].start + memory.info_size;
+  memory.animEnd = memory.animStart + memory.size - new_block_size; // when drawing will take modulo size
+  memory.animSize = new_block_size;
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
     return false;
@@ -176,8 +178,8 @@ memory.nextFit = function (new_block_size) {
   {
     // Start from current position, end in current position (if no blocks available)
     var index = (memory.position + i) % memory.blocks.length;
-    if (memory.allocate(index, new_block_size)) {
-      memory.animEnd = memory.blocks[index].start;
+    if (memory.allocate(index, new_block_size, checkOnly)) {
+      memory.animEnd = memory.blocks[index].start + memory.info_size;
       return true;
     }
   }
@@ -185,9 +187,10 @@ memory.nextFit = function (new_block_size) {
 };
 
 // Loops through all memory to find smallest mem block it can fit - O(n) always
-memory.bestFit = function (new_block_size) {
-  memory.animStart = 0;
-  memory.animEnd = memory.size - new_block_size;
+memory.bestFit = function (new_block_size, checkOnly) {
+  memory.animStart = memory.info_size;
+  memory.animEnd = memory.blocks[memory.blocks.length - 1].start + memory.info_size;
+  memory.animSize = new_block_size;
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
     return false;
@@ -201,16 +204,17 @@ memory.bestFit = function (new_block_size) {
     if (memory.blocks[i].size < best_fit && memory.allocate(i, new_block_size, true)) {
       best_fit = memory.blocks[i].size;
       bf_position = i;
-      memory.animStops.push(memory.blocks[i].start);
+      memory.animStops.push(memory.blocks[i].start + memory.info_size);
     }
   }
-  return memory.allocate(bf_position, new_block_size);
+  return memory.allocate(bf_position, new_block_size, checkOnly);
 };
 
 // Loops through all memory to find largest mem block it can fit - O(n) always
-memory.worstFit = function ( new_block_size ) {
-  memory.animStart = 0;
-  memory.animEnd = memory.size - new_block_size;
+memory.worstFit = function (new_block_size, checkOnly) {
+  memory.animStart = memory.info_size;
+  memory.animEnd = memory.blocks[memory.blocks.length - 1].start + memory.info_size;
+  memory.animSize = new_block_size;
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
     return false;
@@ -224,10 +228,10 @@ memory.worstFit = function ( new_block_size ) {
     if (memory.blocks[i].size > worst_fit && memory.allocate(i, new_block_size, true)) {
       worst_fit = memory.blocks[i].size;
       wf_position = i;
-      memory.animStops.push(memory.blocks[i].start);
+      memory.animStops.push(memory.blocks[i].start + memory.info_size);
     }
   }
-  return memory.allocate(wf_position, new_block_size);
+  return memory.allocate(wf_position, new_block_size, checkOnly);
 };
 
 // Fragments all memory based on percentage to be left free, how many blocks and standard deviation between them (low std_dev, blocks tend to be same size)
