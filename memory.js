@@ -167,8 +167,8 @@ memory.firstFit = function (new_block_size, checkOnly) {
 
 // Starts from previously allocated block till finds block large enough - O(n) worst case
 memory.nextFit = function (new_block_size, checkOnly) {
-  memory.animStart = memory.blocks[(memory.position + 1) % memory.blocks.length].start + memory.info_size;
-  memory.animEnd = memory.blocks[memory.position].start + memory.info_size + memory.size; // when drawing will take modulo size
+  memory.animStart = memory.blocks[memory.position].start + memory.info_size;
+  memory.animEnd = memory.animStart + memory.size - new_block_size; // when drawing will take modulo size
   memory.animSize = new_block_size;
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
@@ -259,28 +259,9 @@ memory.randomFragmentation = function ( block_num, std_dev, percentage_free ) {
   if(std_dev > mean)  // Don't allow deviation more than mean
     std_dev = mean;
 
+  var standard = gaussian(mean, std_dev);   // Init random gaussian generator
   var blocks = new Array();
   var memory_left = memory.size;
-
-  
-  var max_possible_block_num =Math.floor(memory.size/(memory.info_size+1));
-  var min_possible_size_per_block = memory.size/max_possible_block_num;
- 
-  if(max_possible_block_num - block_num < 2)
-  {
-    for(var i=0; i<block_num; i++)
-        blocks.push(min_possible_size_per_block);
-
-    memory_left -= block_num*min_possible_size_per_block;
-    while(memory_left > 0) {
-      for(var i=0; i<block_num; i++){
-        blocks[i]++;
-        memory_left--;
-      }
-    }
-  }
-
-  var standard = gaussian(mean, std_dev);   // Init random gaussian generator
   var bs;
   for(var i=0; i<block_num; i++)
   {
