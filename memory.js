@@ -14,6 +14,11 @@ var memory = {
 memory.init = function(size,info_size) {
   memory.size = size;
   memory.info_size = info_size;
+  if(info_size >= size)
+  {
+    alert("Information size per block cannot exceed total memory size");
+    return -1;
+  }
   memory.position = 0;
   // start with long, big uncut
   memory.blocks = [{
