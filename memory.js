@@ -21,6 +21,11 @@ memory.init = function(size,info_size) {
     start: 0,
     size: size - info_size
   }];
+  var el = document.getElementById("input-block-cnt");
+  var max_possible_block_num =Math.floor(size/(info_size+1)); 
+  el.setAttribute("max",max_possible_block_num);
+  if(el.value > max_possible_block_num)
+    el.value = max_possible_block_num;
 };
 memory.cleanBlock = function ( index ) { memory.blocks[index].free = true; };
 memory.cleanBlocks = function () { for(var i=0; i<memory.blocks.length; i++) memory.cleanBlock(i); };
@@ -246,7 +251,7 @@ memory.randomFragmentation = function ( block_num, std_dev, percentage_free ) {
 
   var standard = gaussian(mean, std_dev);   // Init random gaussian generator
   var blocks = new Array();
-  var memory_left = memory.size-(memory.info_size*block_num);
+  var memory_left = memory.size;
   var bs;
   for(var i=0; i<block_num; i++)
   {
