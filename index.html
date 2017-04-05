@@ -170,9 +170,7 @@
           <button id="button-alloc-all" class="button">Allocate all blocks</button>
           <button id="button-dealloc-all" class="button">Deallocate all blocks</button>
           <hr>
-           
-          <button id="button-anim" class="button">Animation</button>
-          
+                     
           <label for="input-proc">Size of processes:</label>
           <input type="text" id="input-proc" placeholder="Size of processes" value="10,20,5,40">
           
@@ -185,13 +183,14 @@
           </select>
           
           <p id="algo-info-FF">In the first fit approach is to allocate the first free partition or hole large enough which can accommodate the process. It finishes after finding the first suitable free partition.</p>
-          <p id="algo-info-BF">The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. This algorithm first searches the entire list of free partitions and considers the smallest hole that is adequate. It then tries to find a hole which is close to actual process size needed.</p>
+          <p id="algo-info-BF">The best fit deals with allocating the smallest free partition which meets the requirement of the requesting process. It first searches the entire list of free partitions and considers the smallest hole that is adequate, then tries to find a hole which is close to actual process size needed.</p>
           <p id="algo-info-NF">Next fit is a modified version of first fit. It begins as first fit to find a free partition. When called next time it starts searching from where it left off, not from the beginning.</p>
           <p id="algo-info-WF">In worst fit approach is to locate largest available free portion so that the portion left will be big enough to be useful. It is the reverse of best fit.</p>
           
+          <button id="button-anim" class="button">Animation</button>
         </div>
         <div class="right">
-          <canvas id="canvas-mem" width="600" height="600"></canvas>
+          <canvas id="canvas-mem" width="495" height="495"></canvas>
         </div>
         
       </section>
