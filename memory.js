@@ -44,26 +44,23 @@ memory.free = function () {   // Clears all array elements
 memory.getStatistics = function () {  // returns statistics of memory
   var info_size = memory.blocks.length * memory.info_size; // info size per block * block number
   var taken = 0;
-  var free = 0;
   for(var i=0; i<memory.blocks.length; i++) { // Counts how much memory is allocated
     if(!memory.blocks[i].free)
       taken += memory.blocks[i].size;
-    else
-      free += memory.blocks[i].size;
   }
+  var available = memory.size - taken - info_size;
   var percentage_taken = 100*(taken)/memory.size;
   var percentage_info = 100*(info_size)/memory.size;
-  var percentage_free = 100 * free/memory.size;
+  var percentage_free = 100 - percentage_taken-percentage_info;
   return {
     total: memory.size,
     allocated: taken,
-    available: free,
+    available: available,
     info: info_size,
     allocated_percent: percentage_taken,
     available_percent: percentage_free,
     info_percent: percentage_info
   };
-  
 };
 
 infoMemory = function ( block_size ) { return block_size+memory.info_size; }; // Takes into account info size stored in mem block
@@ -160,6 +157,7 @@ memory.firstFit = function (new_block_size) {
   for (var i = 0; i < memory.blocks.length; i++)  // O(n) in worst case (no blocks available)
   {
     if (memory.allocate(i, new_block_size)) {
+      memory.animEnd = memory.blocks[i].start;
       return true;
     }
   }
@@ -169,8 +167,7 @@ memory.firstFit = function (new_block_size) {
 // Starts from previously allocated block till finds block large enough - O(n) worst case
 memory.nextFit = function (new_block_size) {
   memory.animStart = memory.blocks[memory.position].start;
-  var bl = memory.blocks[memory.position > 0 ? memory.position - 1 : memory.blocks.length - 1];
-  memory.animEnd = bl.start + bl.size + memory.info_size - new_block_size;
+  memory.animEnd = memory.blocks[memory.position].start + memory.size - new_block_size; // when drawing will take modulo size
   memory.animStops = [];
   if (new_block_size > memory.size) { // block size is bigger than memory buffer
     return false;
@@ -180,6 +177,7 @@ memory.nextFit = function (new_block_size) {
     // Start from current position, end in current position (if no blocks available)
     var index = (memory.position + i) % memory.blocks.length;
     if (memory.allocate(index, new_block_size)) {
+      memory.animEnd = memory.blocks[index].start;
       return true;
     }
   }
@@ -428,14 +426,15 @@ memory.randomFragmentation = function ( block_num, std_dev, percentage_free ) {
     free[i] = free[random_index];
     free[random_index] = variable;
   }
+  
   // Allocate memory
   var start = 0;
   for (var i = 0; i < blocks.length; i++) {
     memory.blocks.push({
       start: start,
-      size: blocks[i],
+      size: blocks[i]-memory.info_size,
       free: free[i]
     });
-    start += blocks[i] + memory.info_size;
+    start += blocks[i];
   }
 };
