@@ -44,23 +44,26 @@ memory.free = function () {   // Clears all array elements
 memory.getStatistics = function () {  // returns statistics of memory
   var info_size = memory.blocks.length * memory.info_size; // info size per block * block number
   var taken = 0;
+  var free = 0;
   for(var i=0; i<memory.blocks.length; i++) { // Counts how much memory is allocated
     if(!memory.blocks[i].free)
       taken += memory.blocks[i].size;
+    else
+      free += memory.blocks[i].size;
   }
-  var available = memory.size - taken - info_size;
   var percentage_taken = 100*(taken)/memory.size;
   var percentage_info = 100*(info_size)/memory.size;
-  var percentage_free = 100 - percentage_taken-percentage_info;
+  var percentage_free = 100 * free/memory.size;
   return {
     total: memory.size,
     allocated: taken,
-    available: available,
+    available: free,
     info: info_size,
     allocated_percent: percentage_taken,
     available_percent: percentage_free,
     info_percent: percentage_info
   };
+  
 };
 
 infoMemory = function ( block_size ) { return block_size+memory.info_size; }; // Takes into account info size stored in mem block
