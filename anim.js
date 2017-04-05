@@ -2,7 +2,7 @@
 var $anim = (function () {
   
   var linesCnt = 15,
-      availColor = '#3d8f66',
+      availColor = '#3D8F66',
       allocColor = '#990000',
       infoColor = '#94B8B8',
       isAnim = false;
