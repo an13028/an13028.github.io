@@ -2,121 +2,12 @@
 <html lang="lv">
   <head>
     <meta charset="UTF-8">
-    <link rel="stylesheet" href="style.css">
     <title>OSK: Dinamiskā atmiņas iedalīšana</title>
+    <link rel="stylesheet" href="style.css">
     <script src="chart.js"></script>
     <script src="memory.js"></script>
     <script src="anim.js"></script>
-    <script>
-      document.addEventListener('DOMContentLoaded', function () {
-        // elements
-        var canvasPie        = document.getElementById('canvas-pie'),
-            canvasMem        = document.getElementById('canvas-mem'),
-            inputBuffSize    = document.getElementById('input-buff-size'),
-            inputInfoSize    = document.getElementById('input-info-size'),
-            inputBlockCnt    = document.getElementById('input-block-cnt'),
-            inputStdev       = document.getElementById('input-stdev'),
-            inputMemFree     = document.getElementById('input-mem-free'),
-            inputAlgo        = document.getElementById('input-algo'),
-            inputProc        = document.getElementById('input-proc'),
-            buttonInitMem    = document.getElementById('button-init-mem'),
-            buttonFragMem    = document.getElementById('button-frag-mem'),
-            buttonAllocMem   = document.getElementById('button-alloc-all'),
-            buttonDeallocMem = document.getElementById('button-dealloc-all'),
-            buttonAnim       = document.getElementById('button-anim');
-        
-        
-        // render
-        function render () {
-          $chart.drawChart(canvasPie, memory);
-          $anim.drawBlocks(canvasMem, memory);
-        }
-        
-        
-        // events
-        buttonInitMem.addEventListener('click', function (event) {
-          event.preventDefault();
-          
-          var buffSize = Number(inputBuffSize.value),
-              infoSize = Number(inputInfoSize.value);
-          
-          memory.init(buffSize, infoSize);
-          render();
-        });
-        
-        buttonFragMem.addEventListener('click', function (event) {
-          event.preventDefault();
-          
-          var blockCnt = Number(inputBlockCnt.value),
-              stdev    = Number(inputStdev.value),
-              memFree  = Number(inputMemFree.value);
-          
-          memory.randomFragmentation(blockCnt, stdev, memFree);
-          render();
-        });
-        
-        buttonAllocMem.addEventListener('click', function (event) {
-          event.preventDefault();
-          
-          memory.takeBlocks();
-          render();
-        });
-        
-        buttonDeallocMem.addEventListener('click', function (event) {
-          event.preventDefault();
-          
-          memory.cleanBlocks();
-          render();
-        });
-        
-        inputAlgo.addEventListener('change', function (event) {
-          event.preventDefault();
-          
-          // update HTML attribute according to DOM attribute to apply CSS
-          inputAlgo.setAttribute('value', inputAlgo.value);
-        });
-        
-        buttonAnim.addEventListener('click', function (event) {
-          event.preventDefault();
-          
-          if (!$anim.isAnimating()) {
-            var func = 'firstFit';
-            switch (inputAlgo.value) {
-              case 'NF':
-                func = 'nextFit';
-                break;
-              case 'BF':
-                func = 'bestFit';
-                break;
-              case 'WF':
-                func = 'worstFit';
-                break;
-            }
-            var sizes = inputProc.value.split(',');
-            
-            function callback () {
-              render();
-              if (sizes.length > 0) {
-                var size = Number(sizes.shift());
-                if (size > 0) {
-                  memory[func](size);
-                  $anim.startAnim(canvasMem, memory, callback);
-                } else {
-                  callback();
-                }
-              }
-            }
-            
-            callback();
-          }
-        });
-              
-        
-        // init
-        buttonInitMem.click();
-        
-      });
-    </script>
+    <script src="control.js"></script>
   </head>
   <body>
     <header>
@@ -173,7 +64,7 @@
           <hr>
                      
           <label for="input-proc">Size of processes:</label>
-          <input type="text" id="input-proc" placeholder="Size of processes" value="10,20,5,40">
+          <input type="text" id="input-proc" placeholder="Size of processes" value="16,32">
           
           <label for="input-algo">Pick an algorithm:</label>
           <select id="input-algo" value="FF">
