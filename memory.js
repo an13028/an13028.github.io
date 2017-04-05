@@ -167,7 +167,7 @@ memory.firstFit = function (new_block_size, checkOnly) {
 
 // Starts from previously allocated block till finds block large enough - O(n) worst case
 memory.nextFit = function (new_block_size, checkOnly) {
-  memory.animStart = memory.blocks[memory.position].start + memory.info_size;
+  memory.animStart = memory.blocks[(memory.position + 1) % memory.blocks.length].start + memory.info_size;
   memory.animEnd = memory.animStart + memory.size - new_block_size; // when drawing will take modulo size
   memory.animSize = new_block_size;
   memory.animStops = [];
