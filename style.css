@@ -82,8 +82,8 @@ div.left{
 }
 div.right{
   width: 450px;
+  margin: 25px
 }
-
 div.left > * {
   float: left;
   margin: 3px;
