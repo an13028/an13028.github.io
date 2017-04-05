@@ -31,7 +31,7 @@ h1 {
   font-family: 'Syncopate', sans-serif;
   font-size: 1.8em;
   text-transform: uppercase;
-  padding: 20px 0;
+  padding: 15px 0;
 }
 h2{
   text-align: center;
@@ -61,14 +61,14 @@ div.left, div.right {
   overflow: hidden;
 }
 section.left {
-  width: 300px;
+  width: 250px;
 }
 section.right {
-  width: calc(100% - 300px);
-  min-width: 960px;
+  width: calc(100% - 250px);
+  min-width: 1010px;
 }
 section.center {
-  width: 958px;
+  width: 1008px;
   border: 1px solid gray;
   box-sizing: content-box;
   overflow: hidden;
@@ -78,10 +78,10 @@ div.left, div.right {
   padding: 5px;
 }
 div.left{
-  width: 348px;
+  width: 498px;
 }
 div.right{
-  width: 610px;
+  width: 450px;
 }
 
 div.left > * {
@@ -95,7 +95,7 @@ aside {
   margin-left: 20px;
   border-right: 6px solid #990000;
   background-color: #b3cccc;
-  height: 677px;
+  height: 516px;
   float: left;
 }
 aside p{
@@ -136,7 +136,10 @@ button.button:hover {
   box-shadow: 0 10px 12px 0 rgba(0, 0, 0, 0.48);
 }
 #button-anim, #input-proc {
-  width: 332px;
+  width: 265px;
+}
+#button-anim {
+  margin-top: 0px;
 }
 #button-alloc-all {
   clear: right;
@@ -166,7 +169,7 @@ input{
 p[id^=algo-info] {
   display: none;
   font-size: 10px;
-  height: 100px;
+  height: 60px;
 }
 #input-algo[value=FF] ~ p[id$=FF],
 #input-algo[value=BF] ~ p[id$=BF],
