@@ -10,7 +10,7 @@ var $anim = (function () {
       strokeDownColor = '#CCC',
       boxStrokeWidth = 6,
       box1Color = 'rgba(0, 153, 0, 0.5)',
-      box2Color = 'rgba(0, 0, 153, 0.5)',
+      box2Color = 'rgba(0, 0, 153, 0.5)', 
       animSpeed = 0.09, // bytes/ms
       isAnim = false;
   
