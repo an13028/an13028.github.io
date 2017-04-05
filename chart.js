@@ -7,9 +7,9 @@ var $chart = (function () {
       pieMargin = 25,
       legendY = 10,
       legendRow = 20,
-      availColor = '#3d8f66',
+      availColor = '#3D8F66',
       allocColor = '#990000',
-      infoColor = '#94b8b8';
+      infoColor = '#94B8B8';
   
   
   function drawChart (canvas, memory) {
