@@ -11,7 +11,7 @@ var $anim = (function () {
       boxStrokeWidth = 6,
       box1Color = 'rgba(0, 0, 153, 0.5)',
       box2Color = 'rgba(0, 153, 0, 0.5)',
-      animSpeed = 0.07, // bytes/ms
+      animSpeed = 0.2, // bytes/ms
       isAnim = false;
   
   function isAnimating () {
